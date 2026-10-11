@@ -2,11 +2,20 @@
 
 A Streamlit application for PPE kit or fire and smoke detection using the corresponding YOLO model.
 
-![PPE Detection Demo](image.png)
+## Demo
 
-# Dataset and annotations
+### Sample images
 
-![PPE Dataset](ds.avif)
+| | |
+|---|---|
+| ![PPE detection demo image 1](image1.jpeg) | ![PPE detection demo image 2](image2.jpeg) |
+| ![PPE detection demo image 3](image3.jpeg) | ![PPE detection demo image 4](image4.jpeg) |
+| ![PPE detection demo image 5](image5.jpeg) | ![PPE detection demo image 6](image6.jpeg) |
+
+### Sample video
+
+[Watch the demo video](video1.mp4)
+
 ## Prerequisites
 
 - Python (>=3.8)
@@ -39,9 +48,14 @@ streamlit run app.py
 
 ## Alerts and Firebase
 
-The **Alert Dashboard** records PPE-missing alerts and smoke/fire alerts from live camera, browser camera, and uploaded-video detection. Each new alert episode includes a snapshot. When Firebase is configured, the app writes the event and JPEG snapshot to the Realtime Database `ppe_alerts` node and sends a Firebase Cloud Messaging notification to the matching `ppe_safety_alerts` or `fire_safety_alerts` topic.
+The **Alert Dashboard** displays timestamped detections with an image snapshot:
 
-Install dependencies from `requirements.txt`, including `firebase-admin`. The app prefers `minniepro-e2b29-firebase-adminsdk-fbsvc-791c9195cb.json` when it is present, or you can set `FIREBASE_CREDENTIALS` to another service-account path. The database URL defaults to `https://minniepro-e2b29-default-rtdb.firebaseio.com`; override it with `FIREBASE_DATABASE_URL` if our Firebase Realtime Database uses a different URL. Without valid credentials, alerts still appear in the dashboard, but are not saved or pushed to Firebase.
+- **Smoke and fire:** When either hazard is detected in the live camera, browser camera, or an uploaded video, the app records it in the dashboard. With Firebase configured, it saves the event and JPEG snapshot under the Realtime Database `ppe_alerts` node and sends a Firebase Cloud Messaging notification to the `fire_safety_alerts` topic. The notification includes the hazard, time, and source; its record ID can be used to find the saved snapshot.
+- **PPE compliance:** The app tracks each detected worker and checks for a helmet, vest, boots, and gloves. Missing equipment is shown in a PPE alert with the items detected and missing, plus a worker snapshot. Workers with all four items detected are marked compliant in the dashboard. Missing-PPE alerts are sent to the `ppe_safety_alerts` topic when Firebase is configured.
+
+Devices or apps that should receive push notifications need to subscribe to the corresponding Firebase Cloud Messaging topic. Without valid Firebase credentials, alerts and snapshots still appear in the current session's dashboard, but are not saved remotely and no push notifications are sent.
+
+Install dependencies from `requirements.txt`, including `firebase-admin`. The app prefers `minniepro-e2b29-firebase-adminsdk-fbsvc-791c9195cb.json` when it is present, or you can set `FIREBASE_CREDENTIALS` to another service-account path. The database URL defaults to `https://minniepro-e2b29-default-rtdb.firebaseio.com`; override it with `FIREBASE_DATABASE_URL` if our Firebase Realtime Database uses a different URL.
 
 ## Notes
 

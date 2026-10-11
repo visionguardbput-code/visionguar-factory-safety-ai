@@ -22,14 +22,18 @@ A Streamlit application for PPE kit or fire and smoke detection using the corres
 - `best.pt` for PPE kit detection.
 - `best_smoke_fire.pt` for fire and smoke detection.
 
-```bash
-pip install -r requirements.txt
+The project folder includes a `.venv` virtual environment. Virtual environments can contain paths tied to the computer where they were created, so a restored copy may need to be recreated. If activation or Python reports that its interpreter cannot be found, run these commands in PowerShell from the project folder (this recreates `.venv` and installs the project dependencies):
+
+```powershell
+py -m venv --clear .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
 ## Running the App
 
 1. Place `best.pt` and `best_smoke_fire.pt` in the project directory.
-2. Start the Streamlit server:
+2. Activate the project's virtual environment and start the Streamlit server:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1

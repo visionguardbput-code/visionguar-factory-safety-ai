@@ -11,6 +11,7 @@ A Streamlit application for PPE kit or fire and smoke detection using the corres
 | ![PPE detection demo image 1](image1.jpeg) | ![PPE detection demo image 2](image2.jpeg) |
 | ![PPE detection demo image 3](image3.jpeg) | ![PPE detection demo image 4](image4.jpeg) |
 | ![PPE detection demo image 5](image5.jpeg) | ![PPE detection demo image 6](image6.jpeg) |
+| ![PPE detection demo image 7](image7.jpeg) | ![PPE detection demo image 8](image8.jpeg) |
 
 ### Sample video
 

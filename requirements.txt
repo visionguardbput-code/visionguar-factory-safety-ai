@@ -1,0 +1,8 @@
+streamlit
+ultralytics
+opencv-python
+numpy
+pillow
+dill
+streamlit-webrtc
+firebase-admin

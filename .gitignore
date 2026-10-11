@@ -1,0 +1,5 @@
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+.venv/
+__pycache__/
+output/

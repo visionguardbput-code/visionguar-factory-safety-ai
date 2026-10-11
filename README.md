@@ -54,8 +54,11 @@ streamlit run app.py
 
 The **Alert Dashboard** displays timestamped detections with an image snapshot:
 
+- **RFID and PPE camera startup:** In PPE mode, connect the Arduino RFID reader and scan a registered employee card. A matching tag unlocks and automatically starts the PPE camera for a 15-second session. The web dashboard then shows the worker's PPE status and, when equipment is missing, an alert with a snapshot. RFID access is for the PPE camera; it does not start fire/smoke detection.
 - **Smoke and fire:** When either hazard is detected in the live camera, browser camera, or an uploaded video, the app records it in the dashboard. With Firebase configured, it saves the event and JPEG snapshot under the Realtime Database `ppe_alerts` node and sends a Firebase Cloud Messaging notification to the `fire_safety_alerts` topic. The notification includes the hazard, time, and source; its record ID can be used to find the saved snapshot.
 - **PPE compliance:** The app tracks each detected worker and checks for a helmet, vest, boots, and gloves. Missing equipment is shown in a PPE alert with the items detected and missing, plus a worker snapshot. Workers with all four items detected are marked compliant in the dashboard. Missing-PPE alerts are sent to the `ppe_safety_alerts` topic when Firebase is configured.
+
+For live camera alerts, the configurable **Camera Alert Delay** gives the camera a warm-up period before alerts are generated; it defaults to 10 seconds and can be set to 0 for alerts to begin without that delay. Fire/smoke monitoring must be started separately by selecting **Fire and Smoke** and starting the camera. Once an alert is generated, it appears in the web dashboard and is sent to Firebase for delivery to subscribed mobile clients. To sound a buzzer on a phone, the mobile app must subscribe to the appropriate topic and configure its notification channel with sound; the server sends the push but does not control the phone's buzzer or sound settings.
 
 Devices or apps that should receive push notifications need to subscribe to the corresponding Firebase Cloud Messaging topic. Without valid Firebase credentials, alerts and snapshots still appear in the current session's dashboard, but are not saved remotely and no push notifications are sent.
 

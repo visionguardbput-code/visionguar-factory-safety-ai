@@ -22,8 +22,8 @@ pip install -r requirements.txt
 1. Place `best.pt` and `best_smoke_fire.pt` in the project directory.
 2. Start the Streamlit server:
 
-```bash
-cd "d:\Github repo\YOLOv26-ppe-dts"
+```powershell
+.\.venv\Scripts\Activate.ps1
 streamlit run app.py
 ```
 
@@ -49,4 +49,3 @@ Install dependencies from `requirements.txt`, including `firebase-admin`. The ap
 - In Web mode, use **Select Device** on the camera panel to choose among cameras detected by the browser. Camera permission may need to be granted before device names appear. Remote deployments need HTTPS for browser camera access.
 - Helmet detections are retained only when the helmet box center falls within the top 22% of a detected person box. This spatial check suppresses helmets being held away from the head, but is an approximation because the model does not identify head pose or whether a helmet is being worn.
 - The PPE model is `best.pt`; the fire and smoke model is `best_smoke_fire.pt`.
-
